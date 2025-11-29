@@ -4,18 +4,17 @@
 #include <QStyledItemDelegate>
 
 #include "ElaDef.h"
-class ElaCalendarTitleDelegate : public QStyledItemDelegate
-{
-    Q_OBJECT
-public:
-    explicit ElaCalendarTitleDelegate(QObject* parent = nullptr);
-    ~ElaCalendarTitleDelegate();
+class ElaCalendarTitleDelegate : public QStyledItemDelegate {
+  Q_OBJECT
+ public:
+  explicit ElaCalendarTitleDelegate(QObject* parent = nullptr);
+  ~ElaCalendarTitleDelegate();
 
-    void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
-    QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const override;
+  void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
+  QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const override;
 
-private:
-    ElaThemeType::ThemeMode _themeMode;
+ private:
+  ElaThemeType::ThemeMode _themeMode;
 };
 
-#endif // ELACALENDARTITLEDELEGATE_H
+#endif  // ELACALENDARTITLEDELEGATE_H

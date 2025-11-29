@@ -6,16 +6,15 @@
 #include "ElaProperty.h"
 class ElaToolButton;
 class ElaToolButtonStyle;
-class ElaToolButtonPrivate : public QObject
-{
-    Q_OBJECT
-    Q_D_CREATE(ElaToolButton)
-public:
-    explicit ElaToolButtonPrivate(QObject* parent = nullptr);
-    ~ElaToolButtonPrivate();
+class ElaToolButtonPrivate : public QObject {
+  Q_OBJECT
+  Q_D_CREATE(ElaToolButton)
+ public:
+  explicit ElaToolButtonPrivate(QObject* parent = nullptr);
+  ~ElaToolButtonPrivate();
 
-private:
-    ElaToolButtonStyle* _toolButtonStyle{nullptr};
+ private:
+  ElaToolButtonStyle* _toolButtonStyle{nullptr};
 };
 
-#endif // ELATOOLBUTTONPRIVATE_H
+#endif  // ELATOOLBUTTONPRIVATE_H

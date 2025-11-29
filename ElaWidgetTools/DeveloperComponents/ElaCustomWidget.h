@@ -7,25 +7,24 @@
 #include "ElaDef.h"
 
 class QVBoxLayout;
-class ElaCustomWidget : public QDialog
-{
-    Q_OBJECT
-    Q_TAKEOVER_NATIVEEVENT_H
-public:
-    explicit ElaCustomWidget(QWidget* parent = nullptr);
-    ~ElaCustomWidget() override;
+class ElaCustomWidget : public QDialog {
+  Q_OBJECT
+  Q_TAKEOVER_NATIVEEVENT_H
+ public:
+  explicit ElaCustomWidget(QWidget* parent = nullptr);
+  ~ElaCustomWidget() override;
 
-    void setCentralWidget(QWidget* widget);
+  void setCentralWidget(QWidget* widget);
 
-protected:
-    virtual void paintEvent(QPaintEvent* event) override;
-    QVBoxLayout* _mainLayout{nullptr};
-    ElaAppBar* _appBar{nullptr};
-    QWidget* _centralWidget{nullptr};
+ protected:
+  virtual void paintEvent(QPaintEvent* event) override;
+  QVBoxLayout* _mainLayout{nullptr};
+  ElaAppBar* _appBar{nullptr};
+  QWidget* _centralWidget{nullptr};
 
-private:
-    ElaThemeType::ThemeMode _themeMode;
-    ElaApplicationType::WindowDisplayMode _windowDisplayMode;
+ private:
+  ElaThemeType::ThemeMode _themeMode;
+  ElaApplicationType::WindowDisplayMode _windowDisplayMode;
 };
 
-#endif // ELACUSTOMWIDGET_H
+#endif  // ELACUSTOMWIDGET_H

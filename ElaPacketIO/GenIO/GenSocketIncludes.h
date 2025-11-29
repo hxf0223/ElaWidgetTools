@@ -3,13 +3,11 @@
 #define GENSOCKETINCLUDES_H
 
 #if defined(_WIN32)
-#include <cstdio>
-
+#include <Ws2tcpip.h>
+#include <windows.h>
 #include <winsock2.h>
 
-#include <windows.h>
-
-#include <Ws2tcpip.h>
+#include <cstdio>
 #include <fcntl.h>
 #include <io.h>
 #include <winbase.h>

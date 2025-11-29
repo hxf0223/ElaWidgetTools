@@ -1,6 +1,6 @@
 #include "GenIConvertLitEndianVax.h"
 
-#include <cstddef> // for size_t
+#include <cstddef>  // for size_t
 
 #ifdef _WIN32
 #pragma warning(disable : 4311)
@@ -116,105 +116,93 @@ GenIConvertLitEndianVax::~GenIConvertLitEndianVax() {}
 //
 // *****************************
 
-void GenIConvertLitEndianVax::GetFromBuf(const unsigned char* aCurGet, float& aVal) const
-{
-    // Transfer data in one assignment if on correct boundary, else do it byte by byte
-    if (!(reinterpret_cast<size_t>(aCurGet) & 0x3))
-    {
+void GenIConvertLitEndianVax::GetFromBuf(const unsigned char* aCurGet, float& aVal) const {
+  // Transfer data in one assignment if on correct boundary, else do it byte by byte
+  if (!(reinterpret_cast<size_t>(aCurGet) & 0x3)) {
 #if defined GENIO_VAX_G_FLOAT
-        aVal = *reinterpret_cast<const float*>(aCurGet);
+    aVal = *reinterpret_cast<const float*>(aCurGet);
 #elif defined GENIO_LIT_ENDIAN
-        // Check for zero
-        if (*reinterpret_cast<const unsigned int*>(aCurGet))
-        {
-            *reinterpret_cast<unsigned int*>(&aVal) = (*reinterpret_cast<const unsigned int*>(aCurGet) >> 16 | *reinterpret_cast<const unsigned int*>(aCurGet) << 16) - 0x01000000;
-        }
-        else
-        {
-            *reinterpret_cast<unsigned int*>(&aVal) = 0;
-        }
-#else
-        // Check for zero
-        if (*reinterpret_cast<const unsigned int*>(aCurGet))
-        {
-            *reinterpret_cast<unsigned int*>(&aVal) = (*reinterpret_cast<const unsigned int*>(aCurGet) >> 8 & 0x00FF00FF | *reinterpret_cast<const unsigned int*>(aCurGet) << 8 & 0xFF00FF00) - 0x01000000;
-        }
-        else
-        {
-            *reinterpret_cast<unsigned int*>(&aVal) = 0;
-        }
-#endif
+    // Check for zero
+    if (*reinterpret_cast<const unsigned int*>(aCurGet)) {
+      *reinterpret_cast<unsigned int*>(&aVal) =
+          (*reinterpret_cast<const unsigned int*>(aCurGet) >> 16 | *reinterpret_cast<const unsigned int*>(aCurGet) << 16) -
+          0x01000000;
+    } else {
+      *reinterpret_cast<unsigned int*>(&aVal) = 0;
     }
-    else
-    {
+#else
+    // Check for zero
+    if (*reinterpret_cast<const unsigned int*>(aCurGet)) {
+      *reinterpret_cast<unsigned int*>(&aVal) = (*reinterpret_cast<const unsigned int*>(aCurGet) >> 8 & 0x00FF00FF |
+                                                 *reinterpret_cast<const unsigned int*>(aCurGet) << 8 & 0xFF00FF00) -
+                                                0x01000000;
+    } else {
+      *reinterpret_cast<unsigned int*>(&aVal) = 0;
+    }
+#endif
+  } else {
 #ifdef GENIO_VAX_G_FLOAT
-        {
-            *reinterpret_cast<unsigned int*>(&aVal) = aCurGet[0] | aCurGet[1] << 8 | aCurGet[2] << 16 | aCurGet[3] << 24;
-        }
+    { *reinterpret_cast<unsigned int*>(&aVal) = aCurGet[0] | aCurGet[1] << 8 | aCurGet[2] << 16 | aCurGet[3] << 24; }
 #else
-        // Check for zero
-        if (aCurGet[0] || aCurGet[1] || aCurGet[2] || aCurGet[3])
-        {
-            *reinterpret_cast<unsigned int*>(&aVal) =
-                aCurGet[0] << 16 | (aCurGet[1] - 0x01) << 24 | aCurGet[2] | aCurGet[3] << 8;
-        }
-        else
-        {
-            *reinterpret_cast<unsigned int*>(&aVal) = 0;
-        }
-#endif
+    // Check for zero
+    if (aCurGet[0] || aCurGet[1] || aCurGet[2] || aCurGet[3]) {
+      *reinterpret_cast<unsigned int*>(&aVal) = aCurGet[0] << 16 | (aCurGet[1] - 0x01) << 24 | aCurGet[2] | aCurGet[3] << 8;
+    } else {
+      *reinterpret_cast<unsigned int*>(&aVal) = 0;
     }
+#endif
+  }
 }
 
-void GenIConvertLitEndianVax::GetFromBuf(const unsigned char* aCurGet, double& aVal) const
-{
-    // Transfer data in one assignment if on correct boundary, else do it byte by byte
-    if (!(reinterpret_cast<size_t>(aCurGet) & 0x7))
-    {
+void GenIConvertLitEndianVax::GetFromBuf(const unsigned char* aCurGet, double& aVal) const {
+  // Transfer data in one assignment if on correct boundary, else do it byte by byte
+  if (!(reinterpret_cast<size_t>(aCurGet) & 0x7)) {
 #if defined GENIO_VAX_G_FLOAT
-        aVal = *reinterpret_cast<const double*>(aCurGet);
+    aVal = *reinterpret_cast<const double*>(aCurGet);
 #elif defined GENIO_LIT_ENDIAN
-        // Check for zero
-        if (*reinterpret_cast<const GENIO_UINT64*>(aCurGet))
-        {
-            *reinterpret_cast<GENIO_UINT64*>(&aVal) =
-                ((*reinterpret_cast<const GENIO_UINT64*>(aCurGet) >> 48) | (*reinterpret_cast<const GENIO_UINT64*>(aCurGet) >> 16 & UI64(0x00000000FFFF0000)) | (*reinterpret_cast<const GENIO_UINT64*>(aCurGet) << 16 & UI64(0x0000FFFF00000000)) | (*reinterpret_cast<const GENIO_UINT64*>(aCurGet) << 48)) - UI64(0x0020000000000000);
-        }
-        else
-        {
-            *reinterpret_cast<GENIO_UINT64*>(&aVal) = 0;
-        }
-#else
-        // Check for zero
-        if (*reinterpret_cast<const GENIO_UINT64*>(aCurGet))
-        {
-            *reinterpret_cast<GENIO_UINT64*>(&aVal) =
-                (*reinterpret_cast<const GENIO_UINT64*>(aCurGet) >> 8 & UI64(0x00FF00FF00FF00FF) | *reinterpret_cast<const GENIO_UINT64*>(aCurGet) << 8 & UI64(0xFF00FF00FF00FF00)) - UI64(0x0020000000000000);
-        }
-        else
-        {
-            *reinterpret_cast<GENIO_UINT64*>(&aVal) = 0;
-        }
-#endif
+    // Check for zero
+    if (*reinterpret_cast<const GENIO_UINT64*>(aCurGet)) {
+      *reinterpret_cast<GENIO_UINT64*>(&aVal) =
+          ((*reinterpret_cast<const GENIO_UINT64*>(aCurGet) >> 48) |
+           (*reinterpret_cast<const GENIO_UINT64*>(aCurGet) >> 16 & UI64(0x00000000FFFF0000)) |
+           (*reinterpret_cast<const GENIO_UINT64*>(aCurGet) << 16 & UI64(0x0000FFFF00000000)) |
+           (*reinterpret_cast<const GENIO_UINT64*>(aCurGet) << 48)) -
+          UI64(0x0020000000000000);
+    } else {
+      *reinterpret_cast<GENIO_UINT64*>(&aVal) = 0;
     }
-    else
-    {
+#else
+    // Check for zero
+    if (*reinterpret_cast<const GENIO_UINT64*>(aCurGet)) {
+      *reinterpret_cast<GENIO_UINT64*>(&aVal) =
+          (*reinterpret_cast<const GENIO_UINT64*>(aCurGet) >> 8 & UI64(0x00FF00FF00FF00FF) |
+           *reinterpret_cast<const GENIO_UINT64*>(aCurGet) << 8 & UI64(0xFF00FF00FF00FF00)) -
+          UI64(0x0020000000000000);
+    } else {
+      *reinterpret_cast<GENIO_UINT64*>(&aVal) = 0;
+    }
+#endif
+  } else {
 #ifdef GENIO_VAX_G_FLOAT
-        {
-            *reinterpret_cast<GENIO_UINT64*>(&aVal) =
-                static_cast<GENIO_UINT64>(aCurGet[0]) | static_cast<GENIO_UINT64>(aCurGet[1]) << 8 | static_cast<GENIO_UINT64>(aCurGet[2]) << 16 | static_cast<GENIO_UINT64>(aCurGet[3]) << 24 | static_cast<GENIO_UINT64>(aCurGet[4]) << 32 | static_cast<GENIO_UINT64>(aCurGet[5]) << 40 | static_cast<GENIO_UINT64>(aCurGet[6]) << 48 | static_cast<GENIO_UINT64>(aCurGet[7]) << 56;
-        }
-#else
-        // Check for zero
-        if (aCurGet[0] || aCurGet[1] || aCurGet[2] || aCurGet[3] || aCurGet[4] || aCurGet[5] || aCurGet[6] || aCurGet[7])
-        {
-            *reinterpret_cast<GENIO_UINT64*>(&aVal) =
-                (static_cast<GENIO_UINT64>(aCurGet[0]) << 48 | static_cast<GENIO_UINT64>(aCurGet[1]) << 56 | static_cast<GENIO_UINT64>(aCurGet[2]) << 32 | static_cast<GENIO_UINT64>(aCurGet[3]) << 40 | static_cast<GENIO_UINT64>(aCurGet[4]) << 16 | static_cast<GENIO_UINT64>(aCurGet[5]) << 24 | static_cast<GENIO_UINT64>(aCurGet[6]) | static_cast<GENIO_UINT64>(aCurGet[7]) << 8) - UI64(0x0020000000000000);
-        }
-        else
-        {
-            *reinterpret_cast<GENIO_UINT64*>(&aVal) = 0;
-        }
-#endif
+    {
+      *reinterpret_cast<GENIO_UINT64*>(&aVal) =
+          static_cast<GENIO_UINT64>(aCurGet[0]) | static_cast<GENIO_UINT64>(aCurGet[1]) << 8 |
+          static_cast<GENIO_UINT64>(aCurGet[2]) << 16 | static_cast<GENIO_UINT64>(aCurGet[3]) << 24 |
+          static_cast<GENIO_UINT64>(aCurGet[4]) << 32 | static_cast<GENIO_UINT64>(aCurGet[5]) << 40 |
+          static_cast<GENIO_UINT64>(aCurGet[6]) << 48 | static_cast<GENIO_UINT64>(aCurGet[7]) << 56;
     }
+#else
+    // Check for zero
+    if (aCurGet[0] || aCurGet[1] || aCurGet[2] || aCurGet[3] || aCurGet[4] || aCurGet[5] || aCurGet[6] || aCurGet[7]) {
+      *reinterpret_cast<GENIO_UINT64*>(&aVal) =
+          (static_cast<GENIO_UINT64>(aCurGet[0]) << 48 | static_cast<GENIO_UINT64>(aCurGet[1]) << 56 |
+           static_cast<GENIO_UINT64>(aCurGet[2]) << 32 | static_cast<GENIO_UINT64>(aCurGet[3]) << 40 |
+           static_cast<GENIO_UINT64>(aCurGet[4]) << 16 | static_cast<GENIO_UINT64>(aCurGet[5]) << 24 |
+           static_cast<GENIO_UINT64>(aCurGet[6]) | static_cast<GENIO_UINT64>(aCurGet[7]) << 8) -
+          UI64(0x0020000000000000);
+    } else {
+      *reinterpret_cast<GENIO_UINT64*>(&aVal) = 0;
+    }
+#endif
+  }
 }

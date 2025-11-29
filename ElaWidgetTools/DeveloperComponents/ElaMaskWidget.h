@@ -4,17 +4,16 @@
 #include <QWidget>
 
 #include "ElaProperty.h"
-class ElaMaskWidget : public QWidget
-{
-    Q_OBJECT
-    Q_PROPERTY_CREATE(int, MaskAlpha)
-public:
-    explicit ElaMaskWidget(QWidget* parent = nullptr);
-    ~ElaMaskWidget();
-    void doMaskAnimation(int endValue);
+class ElaMaskWidget : public QWidget {
+  Q_OBJECT
+  Q_PROPERTY_CREATE(int, MaskAlpha)
+ public:
+  explicit ElaMaskWidget(QWidget* parent = nullptr);
+  ~ElaMaskWidget();
+  void doMaskAnimation(int endValue);
 
-protected:
-    virtual void paintEvent(QPaintEvent* event) override;
+ protected:
+  virtual void paintEvent(QPaintEvent* event) override;
 };
 
-#endif // ELAMASKWIDGET_H
+#endif  // ELAMASKWIDGET_H

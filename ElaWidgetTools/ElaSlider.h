@@ -4,13 +4,12 @@
 #include <QSlider>
 
 #include "ElaProperty.h"
-class ELA_EXPORT ElaSlider : public QSlider
-{
-    Q_OBJECT
-public:
-    explicit ElaSlider(QWidget* parent = nullptr);
-    explicit ElaSlider(Qt::Orientation orientation, QWidget* parent = nullptr);
-    ~ElaSlider();
+class ELA_EXPORT ElaSlider : public QSlider {
+  Q_OBJECT
+ public:
+  explicit ElaSlider(QWidget* parent = nullptr);
+  explicit ElaSlider(Qt::Orientation orientation, QWidget* parent = nullptr);
+  ~ElaSlider();
 };
 
-#endif // ELASLIDER_H
+#endif  // ELASLIDER_H

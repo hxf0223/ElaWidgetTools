@@ -11,27 +11,26 @@ class ElaComboBox;
 class T_ElaPacketIO;
 #endif
 class T_RecvScreen;
-class T_ElaScreen : public T_BasePage
-{
-    Q_OBJECT
-public:
-    Q_INVOKABLE explicit T_ElaScreen(QWidget* parent = nullptr);
-    ~T_ElaScreen() override;
+class T_ElaScreen : public T_BasePage {
+  Q_OBJECT
+ public:
+  Q_INVOKABLE explicit T_ElaScreen(QWidget* parent = nullptr);
+  ~T_ElaScreen() override;
 
-private:
-    ElaDxgiScreen* _dxgiScreen{nullptr};
-    ElaComboBox* _dxComboBox{nullptr};
-    ElaComboBox* _outputComboBox{nullptr};
+ private:
+  ElaDxgiScreen* _dxgiScreen{nullptr};
+  ElaComboBox* _dxComboBox{nullptr};
+  ElaComboBox* _outputComboBox{nullptr};
 #if defined(Q_OS_WIN) && defined(BUILD_WITH_ELAPACKETIO)
-    T_ElaPacketIO* _packetSendIO{nullptr};
-    T_ElaPacketIO* _packetRecvIO{nullptr};
-    T_RecvScreen* _recvScreen{nullptr};
-    QThread* _packetIOSendThread{nullptr};
-    QThread* _packetIORecvThread{nullptr};
-    void _initSendThread(QString interfaceIP);
-    void _initRecvThread(QString interfaceIP);
-    void _unInitThread(bool isSend);
+  T_ElaPacketIO* _packetSendIO{nullptr};
+  T_ElaPacketIO* _packetRecvIO{nullptr};
+  T_RecvScreen* _recvScreen{nullptr};
+  QThread* _packetIOSendThread{nullptr};
+  QThread* _packetIORecvThread{nullptr};
+  void _initSendThread(QString interfaceIP);
+  void _initRecvThread(QString interfaceIP);
+  void _unInitThread(bool isSend);
 #endif
 };
 #endif
-#endif // T_ELASCREEN_H
+#endif  // T_ELASCREEN_H

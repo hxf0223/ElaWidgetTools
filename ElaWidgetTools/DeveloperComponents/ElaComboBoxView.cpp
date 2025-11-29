@@ -3,20 +3,14 @@
 #include <QMouseEvent>
 
 ElaComboBoxView::ElaComboBoxView(QWidget* parent)
-    : QListView(parent)
-{
-}
+    : QListView(parent) {}
 
-ElaComboBoxView::~ElaComboBoxView()
-{
-}
+ElaComboBoxView::~ElaComboBoxView() {}
 
-void ElaComboBoxView::mousePressEvent(QMouseEvent* event)
-{
-    QModelIndex index = indexAt(event->pos());
-    if (index.isValid())
-    {
-        Q_EMIT itemPressed(index);
-    }
-    event->ignore();
+void ElaComboBoxView::mousePressEvent(QMouseEvent* event) {
+  QModelIndex index = indexAt(event->pos());
+  if (index.isValid()) {
+    Q_EMIT itemPressed(index);
+  }
+  event->ignore();
 }

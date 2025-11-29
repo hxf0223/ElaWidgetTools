@@ -5,17 +5,16 @@
 
 #include "ElaDef.h"
 class ElaScrollPageArea;
-class ElaScrollPageAreaPrivate : public QObject
-{
-    Q_OBJECT
-    Q_D_CREATE(ElaScrollPageArea)
-    Q_PROPERTY_CREATE_D(int, BorderRadius)
-public:
-    explicit ElaScrollPageAreaPrivate(QObject* parent = nullptr);
-    ~ElaScrollPageAreaPrivate() override;
+class ElaScrollPageAreaPrivate : public QObject {
+  Q_OBJECT
+  Q_D_CREATE(ElaScrollPageArea)
+  Q_PROPERTY_CREATE_D(int, BorderRadius)
+ public:
+  explicit ElaScrollPageAreaPrivate(QObject* parent = nullptr);
+  ~ElaScrollPageAreaPrivate() override;
 
-private:
-    ElaThemeType::ThemeMode _themeMode;
+ private:
+  ElaThemeType::ThemeMode _themeMode;
 };
 
-#endif // ELASCROLLPAGEAREAPRIVATE_H
+#endif  // ELASCROLLPAGEAREAPRIVATE_H

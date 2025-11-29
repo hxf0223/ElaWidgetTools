@@ -7,16 +7,15 @@
 
 class ElaListView;
 class ElaListViewStyle;
-class ElaListViewPrivate : public QObject
-{
-    Q_OBJECT
-    Q_D_CREATE(ElaListView)
-public:
-    explicit ElaListViewPrivate(QObject* parent = nullptr);
-    ~ElaListViewPrivate();
+class ElaListViewPrivate : public QObject {
+  Q_OBJECT
+  Q_D_CREATE(ElaListView)
+ public:
+  explicit ElaListViewPrivate(QObject* parent = nullptr);
+  ~ElaListViewPrivate();
 
-private:
-    ElaListViewStyle* _listViewStyle{nullptr};
+ private:
+  ElaListViewStyle* _listViewStyle{nullptr};
 };
 
-#endif // ELALISTVIEWPRIVATE_H
+#endif  // ELALISTVIEWPRIVATE_H

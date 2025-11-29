@@ -9,7 +9,7 @@ SPDX-License-Identifier: MIT
         <DisplayString>{{{data1,Xb}-{data2,Xb}-{data3,Xb}-{(data4[0]),nvoXb}{(data4[1]),nvoXb}-{(data4[2]),nvoXb}{(data4[3]),nvoXb}{(data4[4]),nvoXb}{(data4[5]),nvoXb}{(data4[6]),nvoXb}{(data4[7]),nvoXb}}}</DisplayString>
     </Type>
 
-  <Type Name="QPoint">
+    <Type Name="QPoint">
         <AlternativeType Name="QPointF"/>
         <DisplayString>{{ x = {xp}, y = {yp} }}</DisplayString>
         <Expand>
@@ -176,12 +176,10 @@ SPDX-License-Identifier: MIT
                 <DisplayString>QSizePolicy::ControlType::{ControlType(1 &lt;&lt; bits.ctype)}</DisplayString>
             </Synthetic>
             <Synthetic Name="[expanding directions]">
-                <DisplayString
-                    Condition="(static_cast&lt;Policy&gt;(bits.verPolicy) &amp; ExpandFlag)">
+                <DisplayString Condition="(static_cast&lt;Policy&gt;(bits.verPolicy) &amp; ExpandFlag)">
                         Qt::Vertical (2)
-                    </DisplayString>
-                <DisplayString
-                    Condition="(static_cast&lt;Policy&gt;(bits.horPolicy) &amp; ExpandFlag)">
+                </DisplayString>
+                <DisplayString Condition="(static_cast&lt;Policy&gt;(bits.horPolicy) &amp; ExpandFlag)">
                         Qt::Horizontal (1)
                 </DisplayString>
             </Synthetic>
@@ -314,27 +312,17 @@ SPDX-License-Identifier: MIT
     </Type>
 
     <Type Name="QTime">
-        <DisplayString
-            Condition="mds == 1">{{ millisecond = {mds} }}</DisplayString>
-        <DisplayString
-            Condition="mds != 1">{{ milliseconds = {mds} }}</DisplayString>
+        <DisplayString Condition="mds == 1">{{ millisecond = {mds} }}</DisplayString>
+        <DisplayString Condition="mds != 1">{{ milliseconds = {mds} }}</DisplayString>
         <Expand>
-            <Item Name="[hour]"
-                  Condition="(mds / 3600000) == 1">mds / 3600000, d</Item>
-            <Item Name="[hours]"
-                  Condition="(mds / 3600000) != 1">mds / 3600000, d</Item>
-            <Item Name="[minute]"
-                  Condition="((mds % 3600000) / 60000) == 1">(mds % 3600000) / 60000, d</Item>
-            <Item Name="[minutes]"
-                  Condition="((mds % 3600000) / 60000) != 1">(mds % 3600000) / 60000, d</Item>
-            <Item Name="[second]"
-                  Condition="((mds / 1000) % 60) == 1">(mds / 1000) % 60, d</Item>
-            <Item Name="[seconds]"
-                  Condition="((mds / 1000) % 60) != 1">(mds / 1000) % 60, d</Item>
-            <Item Name="[millisecond]"
-                  Condition="(mds % 1000) == 1">mds % 1000, d</Item>
-            <Item Name="[milliseconds]"
-                  Condition="(mds % 1000) != 1">mds % 1000, d</Item>
+            <Item Name="[hour]" Condition="(mds / 3600000) == 1">mds / 3600000, d</Item>
+            <Item Name="[hours]" Condition="(mds / 3600000) != 1">mds / 3600000, d</Item>
+            <Item Name="[minute]" Condition="((mds % 3600000) / 60000) == 1">(mds % 3600000) / 60000, d</Item>
+            <Item Name="[minutes]" Condition="((mds % 3600000) / 60000) != 1">(mds % 3600000) / 60000, d</Item>
+            <Item Name="[second]" Condition="((mds / 1000) % 60) == 1">(mds / 1000) % 60, d</Item>
+            <Item Name="[seconds]" Condition="((mds / 1000) % 60) != 1">(mds / 1000) % 60, d</Item>
+            <Item Name="[millisecond]" Condition="(mds % 1000) == 1">mds % 1000, d</Item>
+            <Item Name="[milliseconds]" Condition="(mds % 1000) != 1">mds % 1000, d</Item>
         </Expand>
     </Type>
 

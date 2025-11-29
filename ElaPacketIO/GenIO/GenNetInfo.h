@@ -1,55 +1,53 @@
 #ifndef GEN_NETINFO_H
 #define GEN_NETINFO_H
 
-#include "ElaPacketIO_Export.h"
-
 #include <string>
 #include <vector>
 
-class ELA_PACKETIO_EXPORT GenNetInfo
-{
-    struct InfoImpl;
+#include "ElaPacketIO_Export.h"
 
-public:
-    class ELA_PACKETIO_EXPORT Interface
-    {
-    public:
-        Interface();
-        ~Interface();
+class ELA_PACKETIO_EXPORT GenNetInfo {
+  struct InfoImpl;
 
-        bool HasBroadcast() const;
-        bool HasMulticast() const;
-        bool IsUp() const;
-        bool IsLoopback() const;
+ public:
+  class ELA_PACKETIO_EXPORT Interface {
+   public:
+    Interface();
+    ~Interface();
 
-        const std::string& GetAddress() const;
-        const std::string& GetBroadcastAddr() const;
-        const std::string& GetNetmask() const;
+    bool HasBroadcast() const;
+    bool HasMulticast() const;
+    bool IsUp() const;
+    bool IsLoopback() const;
 
-    private:
-        friend class GenNetInfo;
-        InfoImpl* mInfoPtr;
-    };
+    const std::string& GetAddress() const;
+    const std::string& GetBroadcastAddr() const;
+    const std::string& GetNetmask() const;
 
-public:
-    ~GenNetInfo();
+   private:
+    friend class GenNetInfo;
+    InfoImpl* mInfoPtr;
+  };
 
-    //! Methods for iterating over available interfaces.
-    static unsigned GetInterfaceCount();
-    static const Interface* GetInterfaceEntry(unsigned aEntry);
+ public:
+  ~GenNetInfo();
 
-    //! Methods for retrieving specific broadcast or multicast interfaces.
-    static const Interface* GetBroadcastInterface(unsigned aInterfaceNumber = 0);
-    static const Interface* GetMulticastInterface(unsigned aInterfaceNumber = 0);
+  //! Methods for iterating over available interfaces.
+  static unsigned GetInterfaceCount();
+  static const Interface* GetInterfaceEntry(unsigned aEntry);
 
-    static void Print();
+  //! Methods for retrieving specific broadcast or multicast interfaces.
+  static const Interface* GetBroadcastInterface(unsigned aInterfaceNumber = 0);
+  static const Interface* GetMulticastInterface(unsigned aInterfaceNumber = 0);
 
-private:
-    GenNetInfo();
+  static void Print();
 
-    static GenNetInfo& GetInstance();
+ private:
+  GenNetInfo();
 
-    std::vector<Interface*> mInterfaces;
+  static GenNetInfo& GetInstance();
+
+  std::vector<Interface*> mInterfaces;
 };
 
 #endif

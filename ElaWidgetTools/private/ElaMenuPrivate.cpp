@@ -7,10 +7,6 @@
 
 #include "ElaMenu.h"
 ElaMenuPrivate::ElaMenuPrivate(QObject* parent)
-    : QObject{parent}
-{
-}
+    : QObject{parent} {}
 
-ElaMenuPrivate::~ElaMenuPrivate()
-{
-}
+ElaMenuPrivate::~ElaMenuPrivate() {}

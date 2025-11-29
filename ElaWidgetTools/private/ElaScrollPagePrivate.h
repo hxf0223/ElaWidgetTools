@@ -12,26 +12,25 @@ class QVBoxLayout;
 class ElaText;
 class QStackedWidget;
 class ElaBreadcrumbBar;
-class ElaScrollPagePrivate : public QObject
-{
-    Q_OBJECT
-    Q_D_CREATE(ElaScrollPage)
-    Q_PROPERTY_CREATE_D(QWidget*, CustomWidget)
-public:
-    explicit ElaScrollPagePrivate(QObject* parent = nullptr);
-    ~ElaScrollPagePrivate();
-    Q_INVOKABLE void onNavigationRoute(QVariantMap routeData);
+class ElaScrollPagePrivate : public QObject {
+  Q_OBJECT
+  Q_D_CREATE(ElaScrollPage)
+  Q_PROPERTY_CREATE_D(QWidget*, CustomWidget)
+ public:
+  explicit ElaScrollPagePrivate(QObject* parent = nullptr);
+  ~ElaScrollPagePrivate();
+  Q_INVOKABLE void onNavigationRoute(QVariantMap routeData);
 
-private:
-    QHBoxLayout* _pageTitleLayout{nullptr};
-    QVBoxLayout* _mainLayout{nullptr};
-    QStackedWidget* _centralStackedWidget{nullptr};
-    ElaBreadcrumbBar* _breadcrumbBar{nullptr};
-    QMap<QString, int> _centralWidgetMap;
-    int _navigationTargetIndex{0};
-    int _pageTitleSpacing{0};
-    bool _isGrabGesture{false};
-    void _switchCentralStackIndex(int targetIndex, int lastIndex);
+ private:
+  QHBoxLayout* _pageTitleLayout{nullptr};
+  QVBoxLayout* _mainLayout{nullptr};
+  QStackedWidget* _centralStackedWidget{nullptr};
+  ElaBreadcrumbBar* _breadcrumbBar{nullptr};
+  QMap<QString, int> _centralWidgetMap;
+  int _navigationTargetIndex{0};
+  int _pageTitleSpacing{0};
+  bool _isGrabGesture{false};
+  void _switchCentralStackIndex(int targetIndex, int lastIndex);
 };
 
-#endif // ELASCROLLPAGEPRIVATE_H
+#endif  // ELASCROLLPAGEPRIVATE_H

@@ -1,97 +1,89 @@
 #ifndef UTCALLBACK_H
 #define UTCALLBACK_H
 
-#include "ElaPacketIO_Export.h"
-
 #include <algorithm>
 #include <functional>
 #include <list>
 
+#include "ElaPacketIO_Export.h"
 #include "UtBinder.h"
 class UtCallback;
 class UtCallbackList;
 
-class ELA_PACKETIO_EXPORT UtCallbackLink
-{
-public:
-    friend class UtCallback;
+class ELA_PACKETIO_EXPORT UtCallbackLink {
+ public:
+  friend class UtCallback;
 
-    UtCallbackLink(UtCallbackList* aCallbackListPtr)
-        : mCallbackListPtr(aCallbackListPtr)
-    {
-    }
-    ~UtCallbackLink() = default; // To avoid warnings about virtual methods without virtual destructor
-    void Disconnect(UtCallback* aCallbackPtr);
-    void Block(UtCallback* aCallbackPtr, bool aBlock);
+  UtCallbackLink(UtCallbackList* aCallbackListPtr)
+      : mCallbackListPtr(aCallbackListPtr) {}
+  ~UtCallbackLink() = default;  // To avoid warnings about virtual methods without virtual destructor
+  void Disconnect(UtCallback* aCallbackPtr);
+  void Block(UtCallback* aCallbackPtr, bool aBlock);
 
-protected:
-    void Merge(UtCallbackList* aOtherCallbackList);
-    UtCallbackList* mCallbackListPtr;
+ protected:
+  void Merge(UtCallbackList* aOtherCallbackList);
+  UtCallbackList* mCallbackListPtr;
 };
 
-class UtCallback
-{
-public:
-    friend class UtCallbackList;
+class UtCallback {
+ public:
+  friend class UtCallbackList;
 
-    ELA_PACKETIO_EXPORT UtCallback()
-        : mCallbackLinkPtr(nullptr), mIsBlocked(false)
-    {
-    }
-    ELA_PACKETIO_EXPORT UtCallback(const UtCallback& /*aSrc*/)
-        : mCallbackLinkPtr(nullptr), mIsBlocked(false)
-    {
-    }
-    ELA_PACKETIO_EXPORT virtual ~UtCallback();
-    ELA_PACKETIO_EXPORT void Disconnect();
-    ELA_PACKETIO_EXPORT void Block(bool aBlock = true);
+  ELA_PACKETIO_EXPORT UtCallback()
+      : mCallbackLinkPtr(nullptr),
+        mIsBlocked(false) {}
+  ELA_PACKETIO_EXPORT UtCallback(const UtCallback& /*aSrc*/)
+      : mCallbackLinkPtr(nullptr),
+        mIsBlocked(false) {}
+  ELA_PACKETIO_EXPORT virtual ~UtCallback();
+  ELA_PACKETIO_EXPORT void Disconnect();
+  ELA_PACKETIO_EXPORT void Block(bool aBlock = true);
 
-    //! Unblocks the callback.  See Block().
-    void Unblock() { Block(false); }
+  //! Unblocks the callback.  See Block().
+  void Unblock() { Block(false); }
 
-    //! Returns true if this callback is currently blocked.
-    bool IsBlocked() const { return mIsBlocked; }
+  //! Returns true if this callback is currently blocked.
+  bool IsBlocked() const { return mIsBlocked; }
 
-private:
-    void Merge(UtCallbackList* aOtherCallbackList) { mCallbackLinkPtr->Merge(aOtherCallbackList); }
+ private:
+  void Merge(UtCallbackList* aOtherCallbackList) { mCallbackLinkPtr->Merge(aOtherCallbackList); }
 
-    UtCallback& operator=(const UtCallback&) = delete;
+  UtCallback& operator=(const UtCallback&) = delete;
 
-    UtCallbackLink* mCallbackLinkPtr;
-    bool mIsBlocked;
+  UtCallbackLink* mCallbackLinkPtr;
+  bool mIsBlocked;
 };
 
-class ELA_PACKETIO_EXPORT UtCallbackList
-{
-public:
-    friend class UtCallback;
-    friend class UtCallbackLink;
-    using CallbackLink = UtCallbackLink;
+class ELA_PACKETIO_EXPORT UtCallbackList {
+ public:
+  friend class UtCallback;
+  friend class UtCallbackLink;
+  using CallbackLink = UtCallbackLink;
 
-    using cUT_SERIALIZE_IGNORE = bool;
+  using cUT_SERIALIZE_IGNORE = bool;
 
-    using ListType = std::list<UtCallback*>;
-    using IterType = std::list<UtCallback*>::iterator;
+  using ListType = std::list<UtCallback*>;
+  using IterType = std::list<UtCallback*>::iterator;
 
-    explicit UtCallbackList();
-    explicit UtCallbackList(const UtCallbackList& /*aSrc*/);
-    virtual ~UtCallbackList();
+  explicit UtCallbackList();
+  explicit UtCallbackList(const UtCallbackList& /*aSrc*/);
+  virtual ~UtCallbackList();
 
-    void Disconnect(UtCallback* aCallbackPtr);
-    void DisconnectAll();
+  void Disconnect(UtCallback* aCallbackPtr);
+  void DisconnectAll();
 
-    bool IsEmpty() const { return mCallbackList.empty(); }
+  bool IsEmpty() const { return mCallbackList.empty(); }
 
-protected:
-    void ConnectP(UtCallback* aCallbackPtr);
+ protected:
+  void ConnectP(UtCallback* aCallbackPtr);
 
-    void MergeP(UtCallbackList& aOtherCallbackList);
+  void MergeP(UtCallbackList& aOtherCallbackList);
 
-    ListType mCallbackList;
+  ListType mCallbackList;
 
-private:
-    ListType mBlockedCallbackList;
-    UtCallbackList& operator=(const UtCallbackList&) = delete;
+ private:
+  ListType mBlockedCallbackList;
+  UtCallbackList& operator=(const UtCallbackList&) = delete;
 };
 
 #include "UtCallbackN.h"

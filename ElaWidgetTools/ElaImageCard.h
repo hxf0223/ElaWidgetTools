@@ -6,19 +6,18 @@
 #include "ElaProperty.h"
 
 class ElaImageCardPrivate;
-class ELA_EXPORT ElaImageCard : public QWidget
-{
-    Q_OBJECT
-    Q_Q_CREATE(ElaImageCard)
-    Q_PROPERTY_CREATE_Q_H(QImage, CardImage);
-    Q_PROPERTY_CREATE_Q_H(int, BorderRadius)
-    Q_PROPERTY_CREATE_Q_H(bool, IsPreserveAspectCrop)
-public:
-    explicit ElaImageCard(QWidget* parent = nullptr);
-    ~ElaImageCard() override;
+class ELA_EXPORT ElaImageCard : public QWidget {
+  Q_OBJECT
+  Q_Q_CREATE(ElaImageCard)
+  Q_PROPERTY_CREATE_Q_H(QImage, CardImage);
+  Q_PROPERTY_CREATE_Q_H(int, BorderRadius)
+  Q_PROPERTY_CREATE_Q_H(bool, IsPreserveAspectCrop)
+ public:
+  explicit ElaImageCard(QWidget* parent = nullptr);
+  ~ElaImageCard() override;
 
-protected:
-    virtual void paintEvent(QPaintEvent* event) override;
+ protected:
+  virtual void paintEvent(QPaintEvent* event) override;
 };
 
-#endif // ELAIMAGECARD_H
+#endif  // ELAIMAGECARD_H

@@ -6,21 +6,20 @@
 #include "ElaProperty.h"
 
 class ElaLCDNumberPrivate;
-class ELA_EXPORT ElaLCDNumber : public QLCDNumber
-{
-    Q_OBJECT
-    Q_Q_CREATE(ElaLCDNumber)
-    Q_PROPERTY_CREATE_Q_H(bool, IsUseAutoClock)
-    Q_PROPERTY_CREATE_Q_H(QString, AutoClockFormat)
-    Q_PROPERTY_CREATE_Q_H(bool, IsTransparent)
+class ELA_EXPORT ElaLCDNumber : public QLCDNumber {
+  Q_OBJECT
+  Q_Q_CREATE(ElaLCDNumber)
+  Q_PROPERTY_CREATE_Q_H(bool, IsUseAutoClock)
+  Q_PROPERTY_CREATE_Q_H(QString, AutoClockFormat)
+  Q_PROPERTY_CREATE_Q_H(bool, IsTransparent)
 
-public:
-    explicit ElaLCDNumber(QWidget* parent = nullptr);
-    explicit ElaLCDNumber(uint numDigits, QWidget* parent = nullptr);
-    ~ElaLCDNumber() override;
+ public:
+  explicit ElaLCDNumber(QWidget* parent = nullptr);
+  explicit ElaLCDNumber(uint numDigits, QWidget* parent = nullptr);
+  ~ElaLCDNumber() override;
 
-protected:
-    virtual void paintEvent(QPaintEvent* event) override;
+ protected:
+  virtual void paintEvent(QPaintEvent* event) override;
 };
 
-#endif //ELAWIDGETTOOLS_ELALCDNUMBER_H
+#endif  // ELAWIDGETTOOLS_ELALCDNUMBER_H

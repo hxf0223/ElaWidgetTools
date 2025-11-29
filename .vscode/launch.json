@@ -1,0 +1,61 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch QGC (MSVC)",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/QGroundControl.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build",
+            "environment": [
+                {
+                    "name": "QML_IMPORT_PATH",
+                    "value": "D:/dev_libs/Qt/5.15.2/msvc2019_64/qml"
+                },
+                {
+                    "name": "QML2_IMPORT_PATH",
+                    "value": "D:/dev_libs/Qt/5.15.2/msvc2019_64/qml"
+                },
+                {
+                    "name": "QT_PLUGIN_PATH",
+                    "value": "D:/dev_libs/Qt/5.15.2/msvc2019_64/plugins"
+                }
+            ],
+            "console": "internalConsole"
+        },
+        {
+            "name": "gdb for test",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/test",
+            "args": [
+                "gtest_filter=grpc_client::file_download_client"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/bin",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "为 gdb 启用整齐打印",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "libs for gdb",
+                    "text": "set environment LD_LIBRARY_PATH=${workspaceFolder}/bin:$LD_LIBRARY_PATH",
+                    "ignoreFailures": false
+                },
+                {
+                    "description": "debug forked child",
+                    "text": "-gdb-set follow-fork-mode child",
+                    "ignoreFailures": false
+                }
+            ],
+            "miDebuggerPath": "/usr/bin/gdb"
+        }
+    ]
+}

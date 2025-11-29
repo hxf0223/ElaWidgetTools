@@ -4,7 +4,7 @@
 
 #include "GenOConvertLitEndianVax.h"
 
-#include <cstddef> // for size_t
+#include <cstddef>  // for size_t
 
 #ifdef _WIN32
 #pragma warning(disable : 4311)
@@ -120,134 +120,112 @@ GenOConvertLitEndianVax::~GenOConvertLitEndianVax() {}
 //
 // *****************************
 
-void GenOConvertLitEndianVax::PutToBuf(unsigned char* aCurPut, float aVal) const
-{
-    // Transfer data in one assignment if on correct boundary, else do it byte by byte
-    if (!(reinterpret_cast<size_t>(aCurPut) & 0x3))
-    {
+void GenOConvertLitEndianVax::PutToBuf(unsigned char* aCurPut, float aVal) const {
+  // Transfer data in one assignment if on correct boundary, else do it byte by byte
+  if (!(reinterpret_cast<size_t>(aCurPut) & 0x3)) {
 #if defined GENIO_VAX_G_FLOAT
-        *reinterpret_cast<float*>(aCurPut) = aVal;
+    *reinterpret_cast<float*>(aCurPut) = aVal;
 #elif defined GENIO_LIT_ENDIAN
-        // Check for zero
-        if (aVal)
-        {
-            *reinterpret_cast<unsigned int*>(aCurPut) = ((*reinterpret_cast<unsigned int*>(&aVal) + 0x01000000) >> 16) | (*reinterpret_cast<unsigned int*>(&aVal) << 16);
-        }
-        else
-        {
-            *reinterpret_cast<unsigned int*>(aCurPut) = 0;
-        }
-#else
-        // Check for zero
-        if (aVal)
-        {
-            *reinterpret_cast<unsigned int*>(aCurPut) =
-                *reinterpret_cast<unsigned int*>(&aVal) + 0x01000000 >> 8 & 0x00FF00FF | *reinterpret_cast<unsigned int*>(&aVal) << 8 & 0xFF00FF00;
-        }
-        else
-        {
-            *reinterpret_cast<unsigned int*>(aCurPut) = 0;
-        }
-#endif
+    // Check for zero
+    if (aVal) {
+      *reinterpret_cast<unsigned int*>(aCurPut) =
+          ((*reinterpret_cast<unsigned int*>(&aVal) + 0x01000000) >> 16) | (*reinterpret_cast<unsigned int*>(&aVal) << 16);
+    } else {
+      *reinterpret_cast<unsigned int*>(aCurPut) = 0;
     }
-    else
-    {
+#else
+    // Check for zero
+    if (aVal) {
+      *reinterpret_cast<unsigned int*>(aCurPut) = *reinterpret_cast<unsigned int*>(&aVal) + 0x01000000 >> 8 & 0x00FF00FF |
+                                                  *reinterpret_cast<unsigned int*>(&aVal) << 8 & 0xFF00FF00;
+    } else {
+      *reinterpret_cast<unsigned int*>(aCurPut) = 0;
+    }
+#endif
+  } else {
 #ifdef GENIO_VAX_G_FLOAT
-        aCurPut[0] = static_cast<unsigned char>(*reinterpret_cast<unsigned int*>(&aVal) & 0xFF);
-        aCurPut[1] = static_cast<unsigned char>(*reinterpret_cast<unsigned int*>(&aVal) >> 8 & 0xFF);
-        aCurPut[2] = static_cast<unsigned char>(*reinterpret_cast<unsigned int*>(&aVal) >> 16 & 0xFF);
-        aCurPut[3] = static_cast<unsigned char>(*reinterpret_cast<unsigned int*>(&aVal) >> 24);
+    aCurPut[0] = static_cast<unsigned char>(*reinterpret_cast<unsigned int*>(&aVal) & 0xFF);
+    aCurPut[1] = static_cast<unsigned char>(*reinterpret_cast<unsigned int*>(&aVal) >> 8 & 0xFF);
+    aCurPut[2] = static_cast<unsigned char>(*reinterpret_cast<unsigned int*>(&aVal) >> 16 & 0xFF);
+    aCurPut[3] = static_cast<unsigned char>(*reinterpret_cast<unsigned int*>(&aVal) >> 24);
 #else
-        if (aVal)
-        {
-            aCurPut[0] = static_cast<unsigned char>(*reinterpret_cast<unsigned int*>(&aVal) >> 16 & 0xFF);
-            aCurPut[1] = static_cast<unsigned char>(*reinterpret_cast<unsigned int*>(&aVal) >> 24 & 0xFF) + 0x01;
-            aCurPut[2] = static_cast<unsigned char>(*reinterpret_cast<unsigned int*>(&aVal) & 0xFF);
-            aCurPut[3] = static_cast<unsigned char>(*reinterpret_cast<unsigned int*>(&aVal) >> 8 & 0xFF);
-        }
-        else
-        {
-            aCurPut[0] = 0;
-            aCurPut[1] = 0;
-            aCurPut[2] = 0;
-            aCurPut[3] = 0;
-        }
-#endif
+    if (aVal) {
+      aCurPut[0] = static_cast<unsigned char>(*reinterpret_cast<unsigned int*>(&aVal) >> 16 & 0xFF);
+      aCurPut[1] = static_cast<unsigned char>(*reinterpret_cast<unsigned int*>(&aVal) >> 24 & 0xFF) + 0x01;
+      aCurPut[2] = static_cast<unsigned char>(*reinterpret_cast<unsigned int*>(&aVal) & 0xFF);
+      aCurPut[3] = static_cast<unsigned char>(*reinterpret_cast<unsigned int*>(&aVal) >> 8 & 0xFF);
+    } else {
+      aCurPut[0] = 0;
+      aCurPut[1] = 0;
+      aCurPut[2] = 0;
+      aCurPut[3] = 0;
     }
+#endif
+  }
 }
 
-void GenOConvertLitEndianVax::PutToBuf(unsigned char* aCurPut, double aVal) const
-{
-    // Transfer data in one assignment if on correct boundary, else do it byte by byte
-    if (!(reinterpret_cast<size_t>(aCurPut) & 0x7))
-    {
+void GenOConvertLitEndianVax::PutToBuf(unsigned char* aCurPut, double aVal) const {
+  // Transfer data in one assignment if on correct boundary, else do it byte by byte
+  if (!(reinterpret_cast<size_t>(aCurPut) & 0x7)) {
 #if defined GENIO_VAX_G_FLOAT
-        *reinterpret_cast<double*>(aCurPut) = aVal;
+    *reinterpret_cast<double*>(aCurPut) = aVal;
 #elif defined GENIO_LIT_ENDIAN
-        // Check for zero
-        if (aVal)
-        {
-            *reinterpret_cast<GENIO_UINT64*>(aCurPut) =
-                ((*reinterpret_cast<GENIO_UINT64*>(&aVal) >> 48) | (*reinterpret_cast<GENIO_UINT64*>(&aVal) >> 16 & UI64(0x00000000FFFF0000)) | (*reinterpret_cast<GENIO_UINT64*>(&aVal) << 16 & UI64(0x0000FFFF00000000)) | (*reinterpret_cast<GENIO_UINT64*>(&aVal) << 48)) + 0x20;
-        }
-        else
-        {
-            *reinterpret_cast<GENIO_UINT64*>(aCurPut) = 0;
-        }
-#else
-        // Check for zero
-        if (aVal)
-        {
-            // Add 2 to exponent before swap
-            GENIO_UINT64 tempVal = *reinterpret_cast<GENIO_UINT64*>(&aVal) + UI64(0x0020000000000000);
-
-            *reinterpret_cast<GENIO_UINT64*>(aCurPut) =
-                tempVal >> 8 & UI64(0x00FF00FF00FF00FF) | tempVal << 8 & UI64(0xFF00FF00FF00FF00);
-        }
-        else
-        {
-            *reinterpret_cast<GENIO_UINT64*>(aCurPut) = 0;
-        }
-#endif
+    // Check for zero
+    if (aVal) {
+      *reinterpret_cast<GENIO_UINT64*>(aCurPut) = ((*reinterpret_cast<GENIO_UINT64*>(&aVal) >> 48) |
+                                                   (*reinterpret_cast<GENIO_UINT64*>(&aVal) >> 16 & UI64(0x00000000FFFF0000)) |
+                                                   (*reinterpret_cast<GENIO_UINT64*>(&aVal) << 16 & UI64(0x0000FFFF00000000)) |
+                                                   (*reinterpret_cast<GENIO_UINT64*>(&aVal) << 48)) +
+                                                  0x20;
+    } else {
+      *reinterpret_cast<GENIO_UINT64*>(aCurPut) = 0;
     }
-    else
-    {
+#else
+    // Check for zero
+    if (aVal) {
+      // Add 2 to exponent before swap
+      GENIO_UINT64 tempVal = *reinterpret_cast<GENIO_UINT64*>(&aVal) + UI64(0x0020000000000000);
+
+      *reinterpret_cast<GENIO_UINT64*>(aCurPut) =
+          tempVal >> 8 & UI64(0x00FF00FF00FF00FF) | tempVal << 8 & UI64(0xFF00FF00FF00FF00);
+    } else {
+      *reinterpret_cast<GENIO_UINT64*>(aCurPut) = 0;
+    }
+#endif
+  } else {
 #ifdef GENIO_VAX_G_FLOAT
-        aCurPut[0] = static_cast<unsigned char>(*reinterpret_cast<GENIO_UINT64*>(&aVal) & 0xFF);
-        aCurPut[1] = static_cast<unsigned char>(*reinterpret_cast<GENIO_UINT64*>(&aVal) >> 8 & 0xFF);
-        aCurPut[2] = static_cast<unsigned char>(*reinterpret_cast<GENIO_UINT64*>(&aVal) >> 16 & 0xFF);
-        aCurPut[3] = static_cast<unsigned char>(*reinterpret_cast<GENIO_UINT64*>(&aVal) >> 24 & 0xFF);
-        aCurPut[4] = static_cast<unsigned char>(*reinterpret_cast<GENIO_UINT64*>(&aVal) >> 32 & 0xFF);
-        aCurPut[5] = static_cast<unsigned char>(*reinterpret_cast<GENIO_UINT64*>(&aVal) >> 40 & 0xFF);
-        aCurPut[6] = static_cast<unsigned char>(*reinterpret_cast<GENIO_UINT64*>(&aVal) >> 48 & 0xFF);
-        aCurPut[7] = static_cast<unsigned char>(*reinterpret_cast<GENIO_UINT64*>(&aVal) >> 56);
+    aCurPut[0] = static_cast<unsigned char>(*reinterpret_cast<GENIO_UINT64*>(&aVal) & 0xFF);
+    aCurPut[1] = static_cast<unsigned char>(*reinterpret_cast<GENIO_UINT64*>(&aVal) >> 8 & 0xFF);
+    aCurPut[2] = static_cast<unsigned char>(*reinterpret_cast<GENIO_UINT64*>(&aVal) >> 16 & 0xFF);
+    aCurPut[3] = static_cast<unsigned char>(*reinterpret_cast<GENIO_UINT64*>(&aVal) >> 24 & 0xFF);
+    aCurPut[4] = static_cast<unsigned char>(*reinterpret_cast<GENIO_UINT64*>(&aVal) >> 32 & 0xFF);
+    aCurPut[5] = static_cast<unsigned char>(*reinterpret_cast<GENIO_UINT64*>(&aVal) >> 40 & 0xFF);
+    aCurPut[6] = static_cast<unsigned char>(*reinterpret_cast<GENIO_UINT64*>(&aVal) >> 48 & 0xFF);
+    aCurPut[7] = static_cast<unsigned char>(*reinterpret_cast<GENIO_UINT64*>(&aVal) >> 56);
 #else
-        // Check for zero
-        if (aVal)
-        {
-            // Add 2 to the exponent before swap
-            GENIO_UINT64 tempVal = (*reinterpret_cast<GENIO_UINT64*>(&aVal)) + UI64(0x0020000000000000);
+    // Check for zero
+    if (aVal) {
+      // Add 2 to the exponent before swap
+      GENIO_UINT64 tempVal = (*reinterpret_cast<GENIO_UINT64*>(&aVal)) + UI64(0x0020000000000000);
 
-            aCurPut[0] = static_cast<unsigned char>(tempVal >> 48 & 0xFF);
-            aCurPut[1] = static_cast<unsigned char>(tempVal >> 56 & 0xFF);
-            aCurPut[2] = static_cast<unsigned char>(tempVal >> 32 & 0xFF);
-            aCurPut[3] = static_cast<unsigned char>(tempVal >> 40 & 0xFF);
-            aCurPut[4] = static_cast<unsigned char>(tempVal >> 16 & 0xFF);
-            aCurPut[5] = static_cast<unsigned char>(tempVal >> 24 & 0xFF);
-            aCurPut[6] = static_cast<unsigned char>(tempVal & 0xFF);
-            aCurPut[7] = static_cast<unsigned char>(tempVal >> 8 & 0xFF);
-        }
-        else
-        {
-            aCurPut[0] = 0;
-            aCurPut[1] = 0;
-            aCurPut[2] = 0;
-            aCurPut[3] = 0;
-            aCurPut[4] = 0;
-            aCurPut[5] = 0;
-            aCurPut[6] = 0;
-            aCurPut[7] = 0;
-        }
-#endif
+      aCurPut[0] = static_cast<unsigned char>(tempVal >> 48 & 0xFF);
+      aCurPut[1] = static_cast<unsigned char>(tempVal >> 56 & 0xFF);
+      aCurPut[2] = static_cast<unsigned char>(tempVal >> 32 & 0xFF);
+      aCurPut[3] = static_cast<unsigned char>(tempVal >> 40 & 0xFF);
+      aCurPut[4] = static_cast<unsigned char>(tempVal >> 16 & 0xFF);
+      aCurPut[5] = static_cast<unsigned char>(tempVal >> 24 & 0xFF);
+      aCurPut[6] = static_cast<unsigned char>(tempVal & 0xFF);
+      aCurPut[7] = static_cast<unsigned char>(tempVal >> 8 & 0xFF);
+    } else {
+      aCurPut[0] = 0;
+      aCurPut[1] = 0;
+      aCurPut[2] = 0;
+      aCurPut[3] = 0;
+      aCurPut[4] = 0;
+      aCurPut[5] = 0;
+      aCurPut[6] = 0;
+      aCurPut[7] = 0;
     }
+#endif
+  }
 }

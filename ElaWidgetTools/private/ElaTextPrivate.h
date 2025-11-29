@@ -5,21 +5,20 @@
 
 #include "ElaDef.h"
 class ElaText;
-class ElaTextPrivate : public QObject
-{
-    Q_OBJECT
-    Q_D_CREATE(ElaText)
-    Q_PROPERTY_CREATE_D(ElaTextType::TextStyle, TextStyle)
-    Q_PROPERTY_CREATE_D(ElaIconType::IconName, ElaIcon)
-public:
-    explicit ElaTextPrivate(QObject* parent = nullptr);
-    ~ElaTextPrivate() override;
-    Q_SLOT void onThemeChanged(ElaThemeType::ThemeMode themeMode);
+class ElaTextPrivate : public QObject {
+  Q_OBJECT
+  Q_D_CREATE(ElaText)
+  Q_PROPERTY_CREATE_D(ElaTextType::TextStyle, TextStyle)
+  Q_PROPERTY_CREATE_D(ElaIconType::IconName, ElaIcon)
+ public:
+  explicit ElaTextPrivate(QObject* parent = nullptr);
+  ~ElaTextPrivate() override;
+  Q_SLOT void onThemeChanged(ElaThemeType::ThemeMode themeMode);
 
-private:
-    ElaThemeType::ThemeMode _themeMode;
-    bool _isWrapAnywhere{false};
-    qreal _textSpacing{0.5};
+ private:
+  ElaThemeType::ThemeMode _themeMode;
+  bool _isWrapAnywhere{false};
+  qreal _textSpacing{0.5};
 };
 
-#endif // ELATEXTPRIVATE_H
+#endif  // ELATEXTPRIVATE_H

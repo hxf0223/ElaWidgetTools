@@ -9,19 +9,16 @@
 #endif
 Q_SINGLETON_CREATE_CPP(ElaExponentialBlur)
 ElaExponentialBlur::ElaExponentialBlur(QObject* parent)
-    : QObject{parent}, d_ptr(new ElaExponentialBlurPrivate())
-{
-    Q_D(ElaExponentialBlur);
-    d->q_ptr = this;
+    : QObject{parent},
+      d_ptr(new ElaExponentialBlurPrivate()) {
+  Q_D(ElaExponentialBlur);
+  d->q_ptr = this;
 }
 
-ElaExponentialBlur::~ElaExponentialBlur()
-{
-}
+ElaExponentialBlur::~ElaExponentialBlur() {}
 
-QPixmap ElaExponentialBlur::doExponentialBlur(QImage img, const quint16& blurRadius)
-{
-    QImage shadowImage = img.convertToFormat(QImage::Format_ARGB32);
-    ElaExponentialBlur::getInstance()->d_ptr->_drawExponentialBlur(shadowImage, blurRadius);
-    return QPixmap::fromImage(shadowImage);
+QPixmap ElaExponentialBlur::doExponentialBlur(QImage img, const quint16& blurRadius) {
+  QImage shadowImage = img.convertToFormat(QImage::Format_ARGB32);
+  ElaExponentialBlur::getInstance()->d_ptr->_drawExponentialBlur(shadowImage, blurRadius);
+  return QPixmap::fromImage(shadowImage);
 }

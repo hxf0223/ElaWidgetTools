@@ -3,50 +3,46 @@
 
 #define MAX_THREADS 64
 
-#include "ElaPacketIO_Export.h"
-
 #include <exception>
 #include <thread>
 #include <vector>
 
-class ELA_PACKETIO_EXPORT UtThread
-{
-public:
-    using UtThreads = std::vector<UtThread*>;
+#include "ElaPacketIO_Export.h"
 
-    virtual ~UtThread();
+class ELA_PACKETIO_EXPORT UtThread {
+ public:
+  using UtThreads = std::vector<UtThread*>;
 
-    virtual void Run() = 0;
-    bool Start();
-    bool Join();
-    static bool JoinAll(UtThreads& aThreads);
-    const std::thread& GetThreadData() const { return *mThreadPtr; };
-    std::exception_ptr GetException() const { return mException; }
-    static unsigned int GetCoreCount();
+  virtual ~UtThread();
 
-protected:
-    UtThread();
-    UtThread(const UtThread& aSrc) = delete;
-    UtThread& operator=(const UtThread& aRhs) = delete;
+  virtual void Run() = 0;
+  bool Start();
+  bool Join();
+  static bool JoinAll(UtThreads& aThreads);
+  const std::thread& GetThreadData() const { return *mThreadPtr; };
+  std::exception_ptr GetException() const { return mException; }
+  static unsigned int GetCoreCount();
 
-    std::exception_ptr mException;
+ protected:
+  UtThread();
+  UtThread(const UtThread& aSrc) = delete;
+  UtThread& operator=(const UtThread& aRhs) = delete;
 
-private:
-    std::thread* mThreadPtr;
+  std::exception_ptr mException;
+
+ private:
+  std::thread* mThreadPtr;
 };
 
-class UtThreadAdapter : public UtThread
-{
-public:
-    UtThreadAdapter(void (*aFunctionPtr)())
-        : mFunctionPtr(aFunctionPtr)
-    {
-    }
+class UtThreadAdapter : public UtThread {
+ public:
+  UtThreadAdapter(void (*aFunctionPtr)())
+      : mFunctionPtr(aFunctionPtr) {}
 
-    void Run() override { (*mFunctionPtr)(); }
+  void Run() override { (*mFunctionPtr)(); }
 
-private:
-    void (*mFunctionPtr)();
+ private:
+  void (*mFunctionPtr)();
 };
 
 #endif

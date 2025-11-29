@@ -1,42 +1,39 @@
 #ifndef GENSOCKETMANAGER_H
 #define GENSOCKETMANAGER_H
 
-#include "ElaPacketIO_Export.h"
-
 #include <string>
 #include <vector>
 
+#include "ElaPacketIO_Export.h"
 #include "GenIP.h"
 
-namespace GenSockets
-{
-class ELA_PACKETIO_EXPORT GenSocketManager
-{
-public:
-    static void Ready();
-    static std::string GetLastError();
-    static void PrintLastError(const std::string& aHeader);
-    static int GetIP_Count();
-    static GenIP GetIP(int aIndex);
-    static GenIP GetInterfaceLocalIP(const std::string& aInterfaceIP);
-    ~GenSocketManager();
+namespace GenSockets {
+class ELA_PACKETIO_EXPORT GenSocketManager {
+ public:
+  static void Ready();
+  static std::string GetLastError();
+  static void PrintLastError(const std::string& aHeader);
+  static int GetIP_Count();
+  static GenIP GetIP(int aIndex);
+  static GenIP GetInterfaceLocalIP(const std::string& aInterfaceIP);
+  ~GenSocketManager();
 
-protected:
-    GenSocketManager();
+ protected:
+  GenSocketManager();
 
-    void InsertIP(const GenIP& aIP);
+  void InsertIP(const GenIP& aIP);
 
-    void Startup();
+  void Startup();
 
-    void Shutdown();
+  void Shutdown();
 
-    static GenSocketManager& GetInstance();
+  static GenSocketManager& GetInstance();
 
-    void CreateIP_List();
+  void CreateIP_List();
 
-    bool mIsInitialized;
-    std::vector<GenIP> mIP_List;
+  bool mIsInitialized;
+  std::vector<GenIP> mIP_List;
 };
-} // namespace GenSockets
+}  // namespace GenSockets
 
 #endif

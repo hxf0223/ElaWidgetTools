@@ -3,10 +3,9 @@
 
 #include "ElaPacketIO_Export.h"
 
-class ELA_PACKETIO_EXPORT PakConnection
-{
-public:
-    virtual ~PakConnection();
+class ELA_PACKETIO_EXPORT PakConnection {
+ public:
+  virtual ~PakConnection();
 };
 
 #endif

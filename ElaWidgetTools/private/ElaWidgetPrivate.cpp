@@ -3,10 +3,6 @@
 #include "ElaWidget.h"
 
 ElaWidgetPrivate::ElaWidgetPrivate(QObject* parent)
-    : QObject{parent}
-{
-}
+    : QObject{parent} {}
 
-ElaWidgetPrivate::~ElaWidgetPrivate()
-{
-}
+ElaWidgetPrivate::~ElaWidgetPrivate() {}

@@ -20,11 +20,11 @@ set(PROJECT_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/ElaWidgetTools.qrc
 )
 
-if (ELAWIDGETTOOLS_BUILD_STATIC_LIB)
+if(ELAWIDGETTOOLS_BUILD_STATIC_LIB)
     set(LIB_TYPE "STATIC")
-else ()
+else()
     set(LIB_TYPE "SHARED")
-endif ()
+endif()
 
 add_library(${PROJECT_NAME} ${LIB_TYPE}
     ${PROJECT_SOURCES}
@@ -38,12 +38,13 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     $<INSTALL_INTERFACE:${PROJECT_NAME}/include>
 )
 
-if (MINGW)
+if(MINGW)
     set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "")
-endif ()
-if (MSVC)
+endif()
+
+if(MSVC)
     set_target_properties(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX "d")
-endif ()
+endif()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
@@ -52,13 +53,13 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     Qt${QT_VERSION_MAJOR}::Widgets
     Qt${QT_VERSION_MAJOR}::WidgetsPrivate
 )
-if (WIN32)
+
+if(WIN32)
     target_link_libraries(${PROJECT_NAME} PUBLIC
         D3D11
         DXGI
     )
-endif ()
-
+endif()
 
 install(
     TARGETS ${PROJECT_NAME}
@@ -71,12 +72,13 @@ install(TARGETS ${PROJECT_NAME}
     LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/ElaWidgetToolsExample
     RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/ElaWidgetToolsExample
 )
-if (MSVC AND NOT LIB_TYPE STREQUAL "STATIC")
+
+if(MSVC AND NOT LIB_TYPE STREQUAL "STATIC")
     install(
         FILES $<TARGET_PDB_FILE:${PROJECT_NAME}>
         DESTINATION ${CMAKE_INSTALL_PREFIX}/ElaWidgetToolsExample OPTIONAL
     )
-endif ()
+endif()
 
 install(FILES ${EXPORT_HEADERS} DESTINATION ${PROJECT_NAME}/include)
 

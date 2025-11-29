@@ -1,40 +1,37 @@
 #ifndef PAKBUFI_ARCHIVE_H
 #define PAKBUFI_ARCHIVE_H
 
-#include "ElaPacketIO_Export.h"
-
 #include <string>
 
+#include "ElaPacketIO_Export.h"
 #include "GenBuffer.h"
 
 class PakBufO_Archive;
 
 //! Serializes data from a GenI
-class ELA_PACKETIO_EXPORT PakI
-{
-public:
-    static const bool cIS_OUTPUT = false;
-    typedef PakBufO_Archive OutputArchive;
-    typedef PakI InputArchive;
+class ELA_PACKETIO_EXPORT PakI {
+ public:
+  static const bool cIS_OUTPUT = false;
+  typedef PakBufO_Archive OutputArchive;
+  typedef PakI InputArchive;
 
-    PakI(GenBuffer* aBufferPtr);
+  PakI(GenBuffer* aBufferPtr);
 
-    GenBuffer* GetBuffer() { return mBufferPtr; }
+  GenBuffer* GetBuffer() { return mBufferPtr; }
 
-    void IgnoreBytes(int aNumBytes) { mBufferPtr->SetGetPos(mBufferPtr->GetGetPos() + aNumBytes); }
+  void IgnoreBytes(int aNumBytes) { mBufferPtr->SetGetPos(mBufferPtr->GetGetPos() + aNumBytes); }
 
-    template <typename T>
-    void Serialize(T& aVal)
-    {
-        mBufferPtr->getValue(aVal);
-    }
+  template <typename T>
+  void Serialize(T& aVal) {
+    mBufferPtr->getValue(aVal);
+  }
 
-    void SerializeBuffer(char* aBuffer, int aSize) { mBufferPtr->GetRaw(aBuffer, aSize); }
+  void SerializeBuffer(char* aBuffer, int aSize) { mBufferPtr->GetRaw(aBuffer, aSize); }
 
-    void SerializeString(std::string& aString, int aBytes);
+  void SerializeString(std::string& aString, int aBytes);
 
-protected:
-    GenBuffer* mBufferPtr;
+ protected:
+  GenBuffer* mBufferPtr;
 };
 
 #endif

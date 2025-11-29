@@ -3,22 +3,21 @@
 
 #include <QAbstractListModel>
 
-class T_LogModel : public QAbstractListModel
-{
-    Q_OBJECT
-public:
-    explicit T_LogModel(QObject* parent = nullptr);
-    ~T_LogModel();
-    void setLogList(QStringList list);
-    void appendLogList(QString log);
-    QStringList getLogList() const;
+class T_LogModel : public QAbstractListModel {
+  Q_OBJECT
+ public:
+  explicit T_LogModel(QObject* parent = nullptr);
+  ~T_LogModel();
+  void setLogList(QStringList list);
+  void appendLogList(QString log);
+  QStringList getLogList() const;
 
-protected:
-    int rowCount(const QModelIndex& parent = QModelIndex()) const override;
-    QVariant data(const QModelIndex& index, int role) const override;
+ protected:
+  int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+  QVariant data(const QModelIndex& index, int role) const override;
 
-private:
-    QStringList _logList;
+ private:
+  QStringList _logList;
 };
 
-#endif // T_LOGMODEL_H
+#endif  // T_LOGMODEL_H

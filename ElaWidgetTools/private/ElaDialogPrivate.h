@@ -6,18 +6,17 @@
 #include "ElaDef.h"
 class ElaAppBar;
 class ElaDialog;
-class ElaDialogPrivate : public QObject
-{
-    Q_OBJECT
-    Q_D_CREATE(ElaDialog)
-public:
-    explicit ElaDialogPrivate(QObject* parent = nullptr);
-    ~ElaDialogPrivate() override;
+class ElaDialogPrivate : public QObject {
+  Q_OBJECT
+  Q_D_CREATE(ElaDialog)
+ public:
+  explicit ElaDialogPrivate(QObject* parent = nullptr);
+  ~ElaDialogPrivate() override;
 
-private:
-    ElaThemeType::ThemeMode _themeMode;
-    ElaApplicationType::WindowDisplayMode _windowDisplayMode;
-    ElaAppBar* _appBar{nullptr};
+ private:
+  ElaThemeType::ThemeMode _themeMode;
+  ElaApplicationType::WindowDisplayMode _windowDisplayMode;
+  ElaAppBar* _appBar{nullptr};
 };
 
-#endif //ELAFRAMEWORK_ELADIALOGPRIVATE_H
+#endif  // ELAFRAMEWORK_ELADIALOGPRIVATE_H

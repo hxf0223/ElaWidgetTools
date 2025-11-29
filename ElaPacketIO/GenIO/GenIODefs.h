@@ -21,7 +21,8 @@
 #define GENIO_INT64 long long int
 #endif
 
-#elif defined(__GNUC__) && (defined(__ia64) || defined(__amd64) || defined(__x86_64)) && (defined(_LP64) || defined(__LP64) || defined(__LP64__))
+#elif defined(__GNUC__) && (defined(__ia64) || defined(__amd64) || defined(__x86_64)) && \
+    (defined(_LP64) || defined(__LP64) || defined(__LP64__))
 // This is for a 64 bit Intel/AMD processor with GCC
 #if !defined(GENIO_LIT_ENDIAN)
 #define GENIO_LIT_ENDIAN
@@ -205,14 +206,14 @@
 // MSVC's way of declaring large integer constants
 #if defined(_WIN32)
 #if defined(__MINGW32__) || defined(__MINGW64__)
-#define I64(x) x##LL
+#define I64(x)  x##LL
 #define UI64(x) x##ULL
 #else
-#define I64(x) x##i64
+#define I64(x)  x##i64
 #define UI64(x) x##ui64
 #endif
 // GCC's way of declaring large integer constants
 #else
-#define I64(x) x##LL
+#define I64(x)  x##LL
 #define UI64(x) x##ULL
 #endif

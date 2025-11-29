@@ -15,7 +15,7 @@ typedef unsigned short uint16_t;
 typedef signed int int32_t;
 typedef unsigned int uint32_t;
 #ifndef NO_64_BIT_INT
-#ifdef _M_IA64 // microsoft's define for 64 bit machines
+#ifdef _M_IA64  // microsoft's define for 64 bit machines
 typedef signed long int64_t;
 typedef unsigned long uint64_t;
 #else

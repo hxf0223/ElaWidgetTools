@@ -4,15 +4,14 @@
 #include <ElaScrollPage.h>
 
 class QVBoxLayout;
-class T_BasePage : public ElaScrollPage
-{
-    Q_OBJECT
-public:
-    explicit T_BasePage(QWidget* parent = nullptr);
-    ~T_BasePage() override;
+class T_BasePage : public ElaScrollPage {
+  Q_OBJECT
+ public:
+  explicit T_BasePage(QWidget* parent = nullptr);
+  ~T_BasePage() override;
 
-protected:
-    void createCustomWidget(QString desText);
+ protected:
+  void createCustomWidget(QString desText);
 };
 
-#endif // T_BASEPAGE_H
+#endif  // T_BASEPAGE_H

@@ -5,17 +5,12 @@
 #include "ElaDockWidget.h"
 #include "ElaDockWidgetTitleBar.h"
 ElaDockWidgetPrivate::ElaDockWidgetPrivate(QObject* parent)
-    : QObject{parent}
-{
-}
+    : QObject{parent} {}
 
-ElaDockWidgetPrivate::~ElaDockWidgetPrivate()
-{
-}
+ElaDockWidgetPrivate::~ElaDockWidgetPrivate() {}
 
-void ElaDockWidgetPrivate::onThemeModeChanged(ElaThemeType::ThemeMode themeMode)
-{
-    Q_Q(ElaDockWidget);
-    q->update();
-    _themeMode = themeMode;
+void ElaDockWidgetPrivate::onThemeModeChanged(ElaThemeType::ThemeMode themeMode) {
+  Q_Q(ElaDockWidget);
+  q->update();
+  _themeMode = themeMode;
 }

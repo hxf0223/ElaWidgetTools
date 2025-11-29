@@ -39,31 +39,31 @@
     </Type>
 
     <Type Name="QQuickItem">
-      <DisplayString>{d_ptr.d,na}</DisplayString>
-      <Expand>
-        <ExpandedItem>d_ptr.d</ExpandedItem>
-      </Expand>
+        <DisplayString>{d_ptr.d,na}</DisplayString>
+        <Expand>
+            <ExpandedItem>d_ptr.d</ExpandedItem>
+        </Expand>
     </Type>
 
     <Type Name="QUuid">
         <DisplayString>{{{data1,Xb}-{data2,Xb}-{data3,Xb}-{(data4[0]),nvoXb}{(data4[1]),nvoXb}-{(data4[2]),nvoXb}{(data4[3]),nvoXb}{(data4[4]),nvoXb}{(data4[5]),nvoXb}{(data4[6]),nvoXb}{(data4[7]),nvoXb}}}</DisplayString>
     </Type>
 
-   <Type Name="QSpecialInteger&lt;*&gt;">
+    <Type Name="QSpecialInteger&lt;*&gt;">
         <DisplayString>{val}</DisplayString>
         <Expand>
             <Item Name="[value]">val</Item>
         </Expand>
     </Type>
 
-   <Type Name="QBasicAtomicInteger&lt;*&gt;">
+    <Type Name="QBasicAtomicInteger&lt;*&gt;">
         <DisplayString>{_q_value}</DisplayString>
         <Expand>
             <Item Name="[value]">_q_value</Item>
         </Expand>
     </Type>
 
-   <Type Name="QBasicAtomicPointer&lt;*&gt;">
+    <Type Name="QBasicAtomicPointer&lt;*&gt;">
         <Intrinsic Name="isNull" Expression="value()==0" />
         <Intrinsic Name="value" Expression="_q_value.value()" />
         <DisplayString Condition="isNull()">empty</DisplayString>
@@ -73,7 +73,7 @@
         </Expand>
     </Type>
 
-   <Type Name="QPoint">
+    <Type Name="QPoint">
         <AlternativeType Name="QPointF"/>
         <DisplayString>{{ x = {xp}, y = {yp} }}</DisplayString>
         <Expand>
@@ -82,7 +82,7 @@
         </Expand>
     </Type>
 
-   <Type Name="QRect">
+    <Type Name="QRect">
         <DisplayString>{{ x = {x1}, y = {y1}, width = {x2 - x1 + 1}, height = {y2 - y1 + 1} }}</DisplayString>
         <Expand>
             <Item Name="[x]">x1</Item>
@@ -92,7 +92,7 @@
         </Expand>
     </Type>
 
-   <Type Name="QRectF">
+    <Type Name="QRectF">
         <DisplayString>{{ x = {xp}, y = {yp}, width = {w}, height = {h} }}</DisplayString>
         <Expand>
             <Item Name="[x]">xp</Item>
@@ -102,7 +102,7 @@
         </Expand>
     </Type>
 
-   <Type Name="QSize">
+    <Type Name="QSize">
         <AlternativeType Name="QSizeF"/>
         <DisplayString>{{ width = {wd}, height = {ht} }}</DisplayString>
         <Expand>
@@ -111,7 +111,7 @@
         </Expand>
     </Type>
 
-   <Type Name="QLine">
+    <Type Name="QLine">
         <AlternativeType Name="QLineF"/>
         <DisplayString>{{ start point = {pt1}, end point = {pt2} }}</DisplayString>
         <Expand>
@@ -131,7 +131,7 @@
         </Expand>
     </Type>
 
-   <Type Name="QPolygon">
+    <Type Name="QPolygon">
         <DisplayString>{{ size={d-&gt;size} }}</DisplayString>
         <Expand>
             <Item Name="[referenced]">d-&gt;ref.atomic._q_value</Item>
@@ -142,7 +142,7 @@
         </Expand>
     </Type>
 
-   <Type Name="QPolygonF">
+    <Type Name="QPolygonF">
         <DisplayString>{{ size={d-&gt;size} }}</DisplayString>
         <Expand>
             <Item Name="[closed]">
@@ -225,7 +225,7 @@
         </Expand>
     </Type>
 
-   <Type Name="QSizePolicy">
+    <Type Name="QSizePolicy">
         <DisplayString>
             {{ horizontal = {static_cast&lt;Policy&gt;(bits.horPolicy)}, vertical = {static_cast&lt;Policy&gt;(bits.verPolicy)}, type = {ControlType(1 &lt;&lt; bits.ctype)} }}
         </DisplayString>
@@ -240,12 +240,10 @@
                 <DisplayString>QSizePolicy::ControlType::{ControlType(1 &lt;&lt; bits.ctype)}</DisplayString>
             </Synthetic>
             <Synthetic Name="[expanding directions]">
-                <DisplayString
-                    Condition="(static_cast&lt;Policy&gt;(bits.verPolicy) &amp; ExpandFlag)">
+                <DisplayString Condition="(static_cast&lt;Policy&gt;(bits.verPolicy) &amp; ExpandFlag)">
                     Qt::Vertical (2)
                 </DisplayString>
-                <DisplayString
-                    Condition="(static_cast&lt;Policy&gt;(bits.horPolicy) &amp; ExpandFlag)">
+                <DisplayString Condition="(static_cast&lt;Policy&gt;(bits.horPolicy) &amp; ExpandFlag)">
                     Qt::Horizontal (1)
                 </DisplayString>
             </Synthetic>
@@ -256,7 +254,7 @@
         </Expand>
     </Type>
 
-   <Type Name="QChar">
+    <Type Name="QChar">
         <DisplayString>{ucs,c}</DisplayString>
         <StringView>ucs,c</StringView>
         <Expand>
@@ -265,7 +263,7 @@
         </Expand>
     </Type>
 
-   <Type Name="QString">
+    <Type Name="QString">
         <DisplayString>&quot;{(reinterpret_cast&lt;unsigned short*&gt;(d.ptr)),sub}&quot;</DisplayString>
         <StringView>(reinterpret_cast&lt;unsigned short*&gt;(d.ptr)),sub</StringView>
         <Expand>
@@ -348,7 +346,7 @@
         <DisplayString>{{ julian day = {jd} }}</DisplayString>
     </Type>
 
-   <Type Name="QTime">
+    <Type Name="QTime">
         <Intrinsic Name="hour" Expression="mds / 3600000" />
         <Intrinsic Name="minute" Expression="(mds % 3600000) / 60000" />
         <Intrinsic Name="second" Expression="(mds / 1000) % 60" />
@@ -356,26 +354,18 @@
         <DisplayString Condition="mds == 1">{{ millisecond = {mds} }}</DisplayString>
         <DisplayString Condition="mds != 1">{{ milliseconds = {mds} }}</DisplayString>
         <Expand>
-            <Item Name="[hour]"
-                  Condition="(mds / 3600000) == 1">hour(), d</Item>
-            <Item Name="[hours]"
-                  Condition="(mds / 3600000) != 1">hour(), d</Item>
-            <Item Name="[minute]"
-                  Condition="((mds % 3600000) / 60000) == 1">minute(), d</Item>
-            <Item Name="[minutes]"
-                  Condition="((mds % 3600000) / 60000) != 1">minute(), d</Item>
-            <Item Name="[second]"
-                  Condition="((mds / 1000) % 60) == 1">second(), d</Item>
-            <Item Name="[seconds]"
-                  Condition="((mds / 1000) % 60) != 1">second(), d</Item>
-            <Item Name="[millisecond]"
-                  Condition="(mds % 1000) == 1">millisecond(), d</Item>
-            <Item Name="[milliseconds]"
-                  Condition="(mds % 1000) != 1">millisecond(), d</Item>
+            <Item Name="[hour]" Condition="(mds / 3600000) == 1">hour(), d</Item>
+            <Item Name="[hours]" Condition="(mds / 3600000) != 1">hour(), d</Item>
+            <Item Name="[minute]" Condition="((mds % 3600000) / 60000) == 1">minute(), d</Item>
+            <Item Name="[minutes]" Condition="((mds % 3600000) / 60000) != 1">minute(), d</Item>
+            <Item Name="[second]" Condition="((mds / 1000) % 60) == 1">second(), d</Item>
+            <Item Name="[seconds]" Condition="((mds / 1000) % 60) != 1">second(), d</Item>
+            <Item Name="[millisecond]" Condition="(mds % 1000) == 1">millisecond(), d</Item>
+            <Item Name="[milliseconds]" Condition="(mds % 1000) != 1">millisecond(), d</Item>
         </Expand>
     </Type>
 
-   <Type Name="QPair&lt;*,*&gt;">
+    <Type Name="QPair&lt;*,*&gt;">
         <DisplayString>({first}, {second})</DisplayString>
         <Expand>
             <Item Name="[first]">first</Item>
@@ -383,7 +373,7 @@
         </Expand>
     </Type>
 
-   <Type Name="QList&lt;*&gt;">
+    <Type Name="QList&lt;*&gt;">
         <AlternativeType Name="QVector&lt;*&gt;"/>
         <DisplayString>{{ size={d.size} }}</DisplayString>
         <Expand>
@@ -394,7 +384,7 @@
         </Expand>
     </Type>
 
-   <Type Name="QVarLengthArray&lt;*&gt;">
+    <Type Name="QVarLengthArray&lt;*&gt;">
         <DisplayString>{{ size={s} }}</DisplayString>
         <Expand>
             <Item Name="[capacity]">a</Item>
@@ -405,7 +395,7 @@
         </Expand>
     </Type>
 
-   <Type Name="QMap&lt;*,*&gt;">
+    <Type Name="QMap&lt;*,*&gt;">
         <AlternativeType Name="QMultiMap&lt;*,*&gt;"/>
         <DisplayString>{{ size={d.d-&gt;m._Mypair._Myval2._Myval2._Mysize} }}</DisplayString>
         <Expand>
@@ -419,11 +409,11 @@
         </Expand>
     </Type>
 
-   <Type Name="std::pair&lt;*, *&gt;" IncludeView="MapHelper">
+    <Type Name="std::pair&lt;*, *&gt;" IncludeView="MapHelper">
         <DisplayString>{second}</DisplayString>
     </Type>
 
-   <Type Name="QHashPrivate::Node&lt;*,*&gt;">
+    <Type Name="QHashPrivate::Node&lt;*,*&gt;">
         <DisplayString>{value}</DisplayString>
         <Expand>
             <Item Name="key">key</Item>
@@ -431,7 +421,7 @@
         </Expand>
     </Type>
 
-   <Type Name="QHashPrivate::MultiNode&lt;*,*&gt;">
+    <Type Name="QHashPrivate::MultiNode&lt;*,*&gt;">
         <DisplayString Condition="value-&gt;next == 0">{value-&gt;value}</DisplayString>
         <DisplayString Condition="value-&gt;next != 0 &amp;&amp; value-&gt;next-&gt;next == 0">({value-&gt;value}, {value-&gt;next-&gt;value})</DisplayString>
         <DisplayString Condition="value-&gt;next != 0 &amp;&amp; value-&gt;next-&gt;next != 0">({value-&gt;value}, {value-&gt;next-&gt;value}, ...)</DisplayString>
@@ -444,7 +434,7 @@
         </Expand>
     </Type>
 
-   <Type Name="QHash&lt;*,*&gt;">
+    <Type Name="QHash&lt;*,*&gt;">
         <AlternativeType Name="QMultiHash&lt;*,*&gt;"/>
         <Intrinsic Name="getOffset" Category="Method" Expression="d-&gt;spans[span].offsets[offset]">
             <Parameter Name="span" Type="int" />
@@ -602,14 +592,14 @@
         </Expand>
     </Type>
 
-   <Type Name="QSet&lt;*&gt;">
+    <Type Name="QSet&lt;*&gt;">
         <DisplayString>{{ size={q_hash.d-&gt;size} }}</DisplayString>
         <Expand>
             <ExpandedItem>q_hash</ExpandedItem>
         </Expand>
     </Type>
 
-   <Type Name="QVariant">
+    <Type Name="QVariant">
         <Intrinsic Name="typeId" Expression="*(int*)(&amp;((const QtPrivate::QMetaTypeInterface *)(d.packedType &lt;&lt; 2))->typeId)">
         </Intrinsic>
         <Intrinsic Name="dataStar" Expression="(&amp;(d.data.data))">
@@ -630,7 +620,7 @@
         <DisplayString Condition="typeId() == QMetaType::QByteArrayList">{*(QList&lt;QByteArray&gt;*) sharedDataStar()}</DisplayString>
         <DisplayString Condition="typeId() == QMetaType::QStringList">{*(QList&lt;QString&gt;*) sharedDataStar()}</DisplayString>
 
-       <!-- Static primitives-->
+        <!-- Static primitives-->
         <DisplayString Condition="typeId() == QMetaType::Bool">{*(bool*) dataStar()}</DisplayString>
         <DisplayString Condition="typeId() == QMetaType::Int">{*(int*) dataStar()}</DisplayString>
         <DisplayString Condition="typeId() == QMetaType::UInt">{*(unsigned int*) dataStar()}</DisplayString>
@@ -679,7 +669,7 @@
         <DisplayString Condition="typeId() == QMetaType::QModelIndex">ModelIndex</DisplayString>
         <DisplayString Condition="typeId() == QMetaType::QPersistentModelIndex">QPersistentModelIndex</DisplayString>
 
-         <!-- Static gui classes -->
+        <!-- Static gui classes -->
         <DisplayString Condition="typeId() == QMetaType::QFont">QFont</DisplayString>
         <DisplayString Condition="typeId() == QMetaType::QPixmap">QPixmap</DisplayString>
         <DisplayString Condition="typeId() == QMetaType::QBrush">QBrush</DisplayString>
@@ -730,6 +720,6 @@
             <ExpandedItem Condition="typeId() == QMetaType::QByteArrayList">*(QList&lt;QByteArray&gt;*) sharedDataStar()</ExpandedItem>
             <ExpandedItem Condition="typeId() == QMetaType::QStringList">*(QList&lt;QString&gt;*) sharedDataStar()</ExpandedItem>
         </Expand>
-   </Type>
+    </Type>
 
 </AutoVisualizer>

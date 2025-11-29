@@ -1,0 +1,83 @@
+{
+    "terminal.integrated.env.linux": {
+        "PYTHONPATH": "${workspaceFolder}/python;${env:PYTHONPATH}"
+    },
+    "python.envFile": "${workspaceFolder}/.env",
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/python"
+    ],
+    "[python]": {
+        "diffEditor.ignoreTrimWhitespace": false,
+        "editor.defaultFormatter": "ms-python.vscode-pylance",
+        "editor.formatOnSaveMode": "file",
+        "editor.formatOnSave": true,
+        "editor.indentSize": 2,
+        "editor.wordBasedSuggestions": "off",
+        "files.trimTrailingWhitespace": true,
+    },
+    "xmlTools.enableXmlTreeView": true,
+    "editor.formatOnSave": true,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "dotnetAcquisitionExtension.sharedExistingDotnetPath": "C:\\Program Files\\dotnet\\dotnet.exe",
+    "cmake.generator": "Ninja",
+    "cmake.languageSupport.enableFileAPI": true,
+    "cmake.languageSupport.dotnetPath": "C:\\Program Files\\dotnet\\dotnet.exe",
+    "cmake.buildDirectory": "${workspaceFolder}/build",
+    "cmake.configureSettings": {
+        "CMAKE_PREFIX_PATH": [
+            "D:/dev_libs/Qt/6.8.3/msvc2022_64/lib/cmake",
+            "D:/dev_libs/boost_1_88_0/lib64-msvc-14.3/cmake/Boost-1.88.0"
+        ],
+        "ENABLE_PROFILE": "OFF" // Enable profiling for the project
+    },
+    "cmake.configureEnvironment": {
+        "QT_QPA_PLATFORM_PLUGIN_PATH": "D:/dev_libs/Qt/6.8.3/msvc2022_64/plugins",
+        "QML_IMPORT_PATH": "D:/dev_libs/Qt/6.8.3/msvc2022_64/qml",
+        "QML2_IMPORT_PATH": "D:/dev_libs/Qt/6.8.3/msvc2022_64/qml",
+        "QT_PLUGIN_PATH": "D:/dev_libs/Qt/6.8.3/msvc2022_64/plugins",
+    },
+    "cmake.buildEnvironment": {
+        "QML_IMPORT_PATH": "D:/dev_libs/Qt/6.8.3/msvc2022_64/qml",
+        "QML2_IMPORT_PATH": "D:/dev_libs/Qt/6.8.3/msvc2022_64/qml",
+        "QT_PLUGIN_PATH": "D:/dev_libs/Qt/6.8.3/msvc2022_64/plugins",
+    },
+    "C_Cpp.intelliSenseEngine": "disabled",
+    "C_Cpp.autocomplete": "disabled", // So you don't get autocomplete from both extensions.
+    "C_Cpp.errorSquiggles": "disabled", // So you don't get error squiggles from both extensions (clangd's seem to be more reliable anyway).
+    "clangd.path": "clangd",
+    "clangd.onConfigChanged": "restart",
+    "clangd.restartAfterCrash": true,
+    "clangd.checkUpdates": false,
+    "clangd.arguments": [
+        "--log=error",
+        "--pretty",
+        "--clang-tidy",
+        "--background-index=false", // 改为false，明显加快outline的加载
+        "--pch-storage=memory", // 添加该选项，明显加快outline的加载
+        "--all-scopes-completion",
+        "--completion-style=detailed",
+        "--header-insertion=iwyu",
+        "--compile-commands-dir=${workspaceFolder}/build"
+    ],
+    "files.exclude": { // 排除文件和文件夹,使它们在资源管理器中不可见
+        "**/.git": true,
+        "**/build": true,
+        "**/.cache": true,
+    },
+    "search.exclude": { // 排除文件和文件夹,使它们不在搜索结果中不可见
+        "**/.git": true,
+        "**/build": true,
+    },
+    "files.watcherExclude": { // 排除文件和文件夹,使它们不被文件监视器监控,从而减少性能开销,赞
+        "**/build/**": true,
+        "**/.git/**": true,
+        "**/.cache/**": true,
+    },
+    "files.associations": {
+        "optional": "cpp",
+        "functional": "cpp",
+        "utility": "cpp"
+    },
+    "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, AccessModifierOffset: -4, ColumnLimit: 0, IndentWidth: 4 }",
+    "C_Cpp.clang_format_fallbackStyle": "Google"
+}
